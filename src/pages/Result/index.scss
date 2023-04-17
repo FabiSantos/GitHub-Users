@@ -7,16 +7,19 @@
 
     @media (max-width: 765px) {
         flex-direction: column;
-
-
+        margin: 0 6%;
     }
-
 }
 
 .container__result {
     display: flex;
+    flex-direction: row;
     text-align: justify;
     margin: 6%;
+
+    @media (max-width: 765px) {
+        flex-direction: column;
+    }
 
     p {
         color: #333333;
@@ -35,12 +38,12 @@
     &--repositories {
         padding-left: 6%;
 
-
-
+        @media (max-width: 765px) {
+            padding-left: 0%;
+        }
 
         h1 {
             color: #ac53f2;
         }
     }
-
 }
