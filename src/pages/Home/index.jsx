@@ -12,7 +12,7 @@ const Home = () => {
     const handleSearch = (value) => {
         const valueFormated = value.trim();
 
-        if (!valueFormated) (setShowAlert(true));
+        if (!valueFormated) setShowAlert(true);
         else navigate("/result");
         console.log(valueFormated)
     };
@@ -20,13 +20,15 @@ const Home = () => {
     return (
         <div className='home'>
             <GhTitle />
+
             <SearchBar
                 placeholder={"your username"}
                 onSearch={handleSearch}
                 onChange={() => setShowAlert(false)}
                 status={showAlert && "error"}
-                style={{ width: 200 }}
+
             />
+
             {showAlert &&
                 <AlertMessage
                     direction={"vertical"}

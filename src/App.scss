@@ -1,3 +1,8 @@
+//FONT
+
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+
 //PAGES
 @import "./pages/Home/index.scss";
 @import "./pages/Result/index.scss";
@@ -7,7 +12,13 @@
 @import "./components/GhTitle/index.scss";
 @import "./components/SearchBar/index.scss";
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .app {
     text-align: center;
     height: 100%;
+    font-family: Raleway;
 }
