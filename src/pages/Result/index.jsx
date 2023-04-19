@@ -13,42 +13,33 @@ const Result = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    //funcion para recibir el servicio, se guarda en el estado user
-    //no se puede utilizar async await dentro del useEfect
     const handleGetUser = async (user) => {
         await getUser(user)
             .then(response => {
                 setUser(response)
                 setLoading(false);
-                console.log('handle', response);
             })
             .catch(error => {
                 navigate("/notFound")
-                console.log('error resultUser', error)
             })
     }
 
     const handleGetUserRepositories = async (user) => {
         const result = await getUserRepositories(user);
-        //almacenamos en el estado user
         setRepositories(result);
-        console.log('handle2', result);
     }
 
 
     const handleSearch = (value) => {
         setLoading(true);
         const valueFormated = value.trim();
-        console.log('valueFormated', valueFormated);
         if (!valueFormated) setShowAlert(true);
         else {
             handleGetUser(valueFormated);
             handleGetUserRepositories(valueFormated);
         };
-        console.log(valueFormated)
     };
 
-    //consumimos el servicio y lo pintamos
     useEffect(() => {
         handleGetUser(state?.user);
         handleGetUserRepositories(state?.user);
@@ -75,7 +66,6 @@ const Result = () => {
                     />}
             </div>
 
-
             {loading ?
                 <Loading /> :
                 (
@@ -92,8 +82,6 @@ const Result = () => {
                                     <div key={repository.name}>
                                         <h1 >{repository.name}</h1>
                                         <a href={repository.html_url} target="_blank" rel="noopener noreferrer">{repository.html_url}</a>
-
-                                        {/* <div>{repository.stargazers_count}</div> */}
                                     </div>
                                 )
                             })}
