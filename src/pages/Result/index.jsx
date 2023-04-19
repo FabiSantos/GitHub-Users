@@ -13,8 +13,9 @@ const Result = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    //funcion para recibir el servicio, se guarda en el estado user
+    //función para recibir el servicio, se guarda en el estado user
     //no se puede utilizar async await dentro del useEfect
+    //utilizamos el parametro user, para  el valor dinamico que será escrito y capturado en el search, desde la pagina result, cambiando la información que viene desde la pagina home 
     const handleGetUser = async (user) => {
         await getUser(user)
             .then(response => {
@@ -28,14 +29,16 @@ const Result = () => {
             })
     }
 
+
+    //función para recibir el servicio, se guarda en el estado repositories
     const handleGetUserRepositories = async (user) => {
         const result = await getUserRepositories(user);
-        //almacenamos en el estado user
         setRepositories(result);
         console.log('handle2', result);
     }
 
 
+    //función que captura el valor del search de result, 
     const handleSearch = (value) => {
         setLoading(true);
         const valueFormated = value.trim();
@@ -48,7 +51,7 @@ const Result = () => {
         console.log(valueFormated)
     };
 
-    //consumimos el servicio y lo pintamos
+    //consumimos el servicio y lo pintamos al actualizar la pagina, la primera vez con el resultado que viene desde la pagina home, a traves de la información enviada por el useNavigate.
     useEffect(() => {
         handleGetUser(state?.user);
         handleGetUserRepositories(state?.user);

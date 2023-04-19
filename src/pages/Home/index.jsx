@@ -10,9 +10,12 @@ const Home = () => {
     const [showAlert, setShowAlert] = useState(false);
 
     const handleSearch = (value) => {
+        //se elimina posibles espacios en blanco al inicio o final del texto
         const valueFormated = value.trim();
 
         if (!valueFormated) setShowAlert(true);
+
+        //useNavigate con segundo parametro, donde se envía el valor del input a la pagina result{ state: { user: valueFormated } }
         else navigate("/result", { state: { user: valueFormated } });
         console.log(valueFormated)
     };
@@ -20,7 +23,6 @@ const Home = () => {
     return (
         <div className='home'>
             <GhTitle />
-
             <SearchBar
                 placeholder={"your username"}
                 onSearch={handleSearch}
