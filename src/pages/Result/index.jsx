@@ -3,6 +3,7 @@ import GhTitle from "../../components/GhTitle";
 import SearchBar from "../../components/SearchBar";
 import { getUser, getUserRepositories } from "../../services/user";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const Result = () => {
     const [user, setUser] = useState({});
@@ -76,7 +77,7 @@ const Result = () => {
 
 
             {loading ?
-                <p>Loading...</p> :
+                <Loading /> :
                 (
                     <div className='container__result'>
                         {user &&
@@ -92,7 +93,7 @@ const Result = () => {
                                         <h1 >{repository.name}</h1>
                                         <a href={repository.html_url} target="_blank" rel="noopener noreferrer">{repository.html_url}</a>
 
-                                        <div>{repository.stargazers_count}</div>
+                                        {/* <div>{repository.stargazers_count}</div> */}
                                     </div>
                                 )
                             })}
