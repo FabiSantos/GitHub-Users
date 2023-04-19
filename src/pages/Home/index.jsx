@@ -13,7 +13,7 @@ const Home = () => {
         const valueFormated = value.trim();
 
         if (!valueFormated) setShowAlert(true);
-        else navigate("/result");
+        else navigate("/result", { state: { user: valueFormated } });
         console.log(valueFormated)
     };
 
