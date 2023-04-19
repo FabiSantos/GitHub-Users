@@ -10,7 +10,7 @@ const SearchBar = ({ onSearch, onChange, placeholder, status, style }) => {
                 onSearch={onSearch}
                 status={status}
                 style={style}
-
+                className="input-search"
             />
         </div>
     );

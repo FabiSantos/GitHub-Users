@@ -1,0 +1,20 @@
+.container__text {
+    font-size: 40px;
+    color: #333333;
+
+    @media (max-width: 765px) {
+        margin-bottom: 16px;
+    }
+
+    &--title {
+        font-family: 'Monaco', sans-serif;
+    }
+
+    &--sub-title {
+        font-style: italic;
+        font-weight: 200;
+        padding-left: 12px;
+
+
+    }
+}
