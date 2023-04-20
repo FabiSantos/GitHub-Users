@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import "./index.scss"
 
 const NotFound = () => {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+
+
+        ctx.beginPath();
+        ctx.moveTo(5, 45);
+        ctx.bezierCurveTo(15, 64, 45, 64, 55, 45);
+
+        ctx.lineTo(55, 20);
+        ctx.bezierCurveTo(55, 15, 50, 10, 45, 10);
+
+        ctx.lineTo(15, 10);
+
+        ctx.bezierCurveTo(15, 10, 5, 10, 5, 20);
+        ctx.lineTo(5, 45);
+
+        ctx.fillStyle = '#2f3640';
+        ctx.strokeStyle = '#f5f6fa';
+        ctx.fill();
+        ctx.stroke();
+    }, []);
+
     return (
         <div className='container__not-found'>
             <div className="moon"></div>
@@ -40,11 +65,12 @@ const NotFound = () => {
                 <div className="astronaut__wrist-right"></div>
 
                 <div className="astronaut__cord">
+
                     <canvas id="cord" height="500px" width="500px"></canvas>
                 </div>
 
                 <div className="astronaut__head">
-                    <canvas id="visor" width="60px" height="60px"></canvas>
+                    <canvas id="visor" width="60px" height="60px" ref={canvasRef} ></canvas>
                     <div className="astronaut__head-visor-flare1"></div>
                     <div className="astronaut__head-visor-flare2"></div>
                 </div>
