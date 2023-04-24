@@ -1,23 +1,16 @@
-import React, { useEffect, useRef } from 'react'
-import "./index.scss"
+import React, { useRef, useEffect } from 'react';
 
-const NotFound = () => {
-    const canvasRef = useRef(null);
+function NotFound() {
+    const visorRef = useRef(null);
+    const cordRef = useRef(null);
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-
-
+    function drawVisor(ctx) {
         ctx.beginPath();
         ctx.moveTo(5, 45);
         ctx.bezierCurveTo(15, 64, 45, 64, 55, 45);
-
         ctx.lineTo(55, 20);
         ctx.bezierCurveTo(55, 15, 50, 10, 45, 10);
-
         ctx.lineTo(15, 10);
-
         ctx.bezierCurveTo(15, 10, 5, 10, 5, 20);
         ctx.lineTo(5, 45);
 
@@ -25,7 +18,71 @@ const NotFound = () => {
         ctx.strokeStyle = '#f5f6fa';
         ctx.fill();
         ctx.stroke();
+    }
+
+    function animate(ctx) {
+        let y1 = 160;
+        let y2 = 100;
+        let y3 = 100;
+
+        let y1Forward = true;
+        let y2Forward = false;
+        let y3Forward = true;
+
+        function drawCord() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            ctx.beginPath();
+            ctx.moveTo(130, 170);
+            ctx.bezierCurveTo(250, y1, 345, y2, 400, y3);
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 8;
+            ctx.stroke();
+        }
+
+        function update() {
+            if (y1 === 100) {
+                y1Forward = true;
+            }
+
+            if (y1 === 300) {
+                y1Forward = false;
+            }
+
+            if (y2 === 100) {
+                y2Forward = true;
+            }
+
+            if (y2 === 310) {
+                y2Forward = false;
+            }
+
+            if (y3 === 100) {
+                y3Forward = true;
+            }
+
+            if (y3 === 317) {
+                y3Forward = false;
+            }
+
+            y1Forward ? y1 += 1 : y1 -= 1;
+            y2Forward ? y2 += 1 : y2 -= 1;
+            y3Forward ? y3 += 1 : y3 -= 1;
+            drawCord();
+        }
+
+        setInterval(update, 10);
+    }
+
+    useEffect(() => {
+        const visorCanvas = visorRef.current;
+        const visorCtx = visorCanvas.getContext('2d');
+        drawVisor(visorCtx);
+
+        const cordCanvas = cordRef.current;
+        const cordCtx = cordCanvas.getContext('2d');
+        animate(cordCtx);
     }, []);
+
 
     return (
         <div className='container__not-found'>
@@ -66,11 +123,11 @@ const NotFound = () => {
 
                 <div className="astronaut__cord">
 
-                    <canvas id="cord" height="500px" width="500px"></canvas>
+                    <canvas id="cord" height="500px" width="500px" ref={cordRef}></canvas>
                 </div>
 
                 <div className="astronaut__head">
-                    <canvas id="visor" width="60px" height="60px" ref={canvasRef} ></canvas>
+                    <canvas id="visor" width="60px" height="60px" ref={visorRef} ></canvas>
                     <div className="astronaut__head-visor-flare1"></div>
                     <div className="astronaut__head-visor-flare2"></div>
                 </div>
